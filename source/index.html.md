@@ -19,8 +19,8 @@ search: true
 
 Welcome to the `Lendroid-2-JS`!
 
-`Lendroid-2-JS` is a library to wrapper the lendroid Server and Lendroid Contract API's.<br/>
-You can view code examples in the dark area to the right.
+`Lendroid-2-JS` is a library to wrapper the lendroid Server and Lendroid Contract API's.<br/> You can view code examples
+in the dark area to the right.
 
 <mark class="notice">It uses web3.js [latest](https://web3js.readthedocs.io/en/v1.2.4/)</mark>
 
@@ -45,7 +45,7 @@ For the specific version, please check it's [releases](https://github.com/lendro
 > To import:
 
 ```javascript
-import { Lendroid } from "lendroid-protocol";
+import { Lendroid } from 'lendroid-protocol'
 ```
 
 First, you need to Import `Lendroid-2-JS` library.
@@ -56,17 +56,17 @@ First, you need to Import `Lendroid-2-JS` library.
 
 ```javascript
 const options = {
-  type: "metamask",
+  type: 'metamask',
   tokens,
-  onEvent: handleMessage
-};
+  onEvent: handleMessage,
+}
 
-const LendroidJS = new Lendroid(options);
+const LendroidJS = new Lendroid(options)
 ```
 
 | Key     | Type       | Default    | Description                                                                                                    |
 | ------- | ---------- | ---------- | -------------------------------------------------------------------------------------------------------------- |
-| type    | `string`   | `metamask` | Provider Type. (metamask, torus, formtatic)                                                                    |
+| type    | `string`   | `metamask` | Provider Type. (metamask, formtatic)                                                                           |
 | tokens  | `object`   | -          | Deployed tokens. [example](https://github.com/lendroidproject/wallet-ui/blob/master/assets/contracts.js)       |
 | onEvent | `function` | -          | Event listener. [Events](https://github.com/lendroidproject/lendroid-2-js/blob/master/src/constants/Events.ts) |
 
@@ -74,16 +74,16 @@ const LendroidJS = new Lendroid(options);
 
 ## 1. Multiple Providers
 
-`Lendroid-2-JS` working with Metamask as well as [Torus](https://www.npmjs.com/package/@toruslabs/torus-embed) and [Fortmatic](https://fortmatic.com/) now.
+`Lendroid-2-JS` working with Metamask as well as [Fortmatic](https://fortmatic.com/) now.
 
 ## 2. Event handler
 
 > Example:
 
 ```javascript
-this.onEvent(Events.NETWORK_CHANGED);
-this.onEvent(Events.BALANCE_UPDATED, { data });
-this.onEvent(Events.BALANCE_FAILED, err);
+this.onEvent(Events.NETWORK_CHANGED)
+this.onEvent(Events.BALANCE_UPDATED, { data })
+this.onEvent(Events.BALANCE_FAILED, err)
 ```
 
 | Key    | Type     | Default | Description    |
@@ -147,19 +147,25 @@ Fetch Contracts, Blance, LSFUI Tokens, Pools and Names, Positions. And provide i
 
 ### Contract Instances
 
-[Web3 Contract Instances](https://web3js.readthedocs.io/en/v1.2.4/web3-eth-contract.html#eth-contract) of Supported Tokens.
-Check [here](https://github.com/lendroidproject/Lendroid-2-JS/blob/master/src/constants/contracts/ContractAddresses.ts) for supported Token from `Lendroid-2-JS`.
+[Web3 Contract Instances](https://web3js.readthedocs.io/en/v1.2.4/web3-eth-contract.html#eth-contract) of Supported
+Tokens. Check
+[here](https://github.com/lendroidproject/Lendroid-2-JS/blob/master/src/constants/contracts/ContractAddresses.ts) for
+supported Token from `Lendroid-2-JS`.
 
-Note: You can define undeployed ABIs [here](https://github.com/lendroidproject/lendroid-2-js/blob/master/src/constants/SupportTokens.ts). And set `all` inside of supportTokens - check [example](https://github.com/lendroidproject/lendroid-2-js/blob/master/src/constants/SupportTokens.ts#L6).
+Note: You can define undeployed ABIs
+[here](https://github.com/lendroidproject/lendroid-2-js/blob/master/src/constants/SupportTokens.ts). And set `all`
+inside of supportTokens - check
+[example](https://github.com/lendroidproject/lendroid-2-js/blob/master/src/constants/SupportTokens.ts#L6).
 
-You need to provide contract tokens from `Wallet`. Check example [here](https://github.com/lendroidproject/wallet-ui/blob/master/assets/contracts.js).
+You need to provide contract tokens from `Wallet`. Check example
+[here](https://github.com/lendroidproject/wallet-ui/blob/master/assets/contracts.js).
 
 ## contracts.expiries
 
 <code class="sample">const { expiries } = library.contracts</code>
 
-Every last `thursday` of month for current year. And manual expiries.
-You can check how to calculate from [here](https://github.com/lendroidproject/lendroid-2-js/blob/master/src/services/contracts.ts)
+Every last `thursday` of month for current year. And manual expiries. You can check how to calculate from
+[here](https://github.com/lendroidproject/lendroid-2-js/blob/master/src/services/contracts.ts)
 
 | Key       | Type     | Default | Description               |
 | --------- | -------- | ------- | ------------------------- |
@@ -176,19 +182,12 @@ You can check how to calculate from [here](https://github.com/lendroidproject/le
 
 ```javascript
 // Metamask
-this.library.enable(window.ethereum, "metamask");
-
-// Torus
-const { default: Torus } = require("@toruslabs/torus-embed");
-const torus = new Torus();
-await torus.init();
-await torus.login();
-this.library.enable(torus.provider, "torus");
+this.library.enable(window.ethereum, 'metamask')
 
 // Fortmatic
-const Fortmatic = require("fortmatic");
-const fm = new Fortmatic(process.env.FORTMATIC_API_KEY);
-this.library.enable(fm.getProvider(), "fortmatic");
+const Fortmatic = require('fortmatic')
+const fm = new Fortmatic(process.env.FORTMATIC_API_KEY)
+this.library.enable(fm.getProvider(), 'fortmatic')
 ```
 
 <code class="sample">library.enable(provider, type)</code>
@@ -354,8 +353,8 @@ library.contracts
 
 <code class="sample">library.contracts.onSplit(token, form)</code>
 
-Split token into `I+F` or `I+S+U` tokens.
-It will create new IFSU tokens, so `withContract` parameter should be `true` for `getBalances` method.
+Split token into `I+F` or `I+S+U` tokens. It will create new IFSU tokens, so `withContract` parameter should be `true`
+for `getBalances` method.
 
 ## contracts.onFuse
 
@@ -386,11 +385,7 @@ Fuse split tokens back to wrapped tokens.
 const handlePoolName = e => {
   const val = e ? e.target.value : ''
   setPoolName(val)
-  throttleFunction(
-    len => library.contracts.onRegisterLookUpStake(len).then(handleStake),
-    200,
-    val.length
-  )
+  throttleFunction(len => library.contracts.onRegisterLookUpStake(len).then(handleStake), 200, val.length)
 }
 ```
 
@@ -417,15 +412,13 @@ Register `pool name`.
 > Sample Code
 
 ```javascript
-library.contracts
-  .onCreatePool(form)
-  .then(() => {
-    if (riskFree) {
-      library.contracts.getRiskFreePools()
-    } else {
-      library.contracts.getRiskyPools()
-    }
-  })
+library.contracts.onCreatePool(form).then(() => {
+  if (riskFree) {
+    library.contracts.getRiskFreePools()
+  } else {
+    library.contracts.getRiskyPools()
+  }
+})
 ```
 
 <code class="sample">library.contracts.onCreatePool(form)</code>
@@ -567,16 +560,14 @@ Retire offered token.
 > Sample Code
 
 ```javascript
-library.contracts
-  .onContribute(poolId, amount, { riskFree })
-  .then(() => {
-    if (riskFree) {
-      library.contracts.getRiskFreePools()
-    } else {
-      library.contracts.getRiskyPools()
-    }
-    library.contracts.getBalances()
-  })
+library.contracts.onContribute(poolId, amount, { riskFree }).then(() => {
+  if (riskFree) {
+    library.contracts.getRiskFreePools()
+  } else {
+    library.contracts.getRiskyPools()
+  }
+  library.contracts.getBalances()
+})
 ```
 
 <code class="sample">library.contracts.onContribute(poolId, value, options)</code>
@@ -588,16 +579,14 @@ Withdraw contributed balance from Pool.
 > Sample Code
 
 ```javascript
-library.contracts
-  .onWithdrawContribute(poolId, amount, { riskFree })
-  .then(() => {
-    if (riskFree) {
-      library.contracts.getRiskFreePools()
-    } else {
-      library.contracts.getRiskyPools()
-    }
-    library.contracts.getBalances()
-  })
+library.contracts.onWithdrawContribute(poolId, amount, { riskFree }).then(() => {
+  if (riskFree) {
+    library.contracts.getRiskFreePools()
+  } else {
+    library.contracts.getRiskyPools()
+  }
+  library.contracts.getBalances()
+})
 ```
 
 <code class="sample">library.contracts.onWithdrawContribute(poolId, value, options)</code>
@@ -631,7 +620,7 @@ library.contracts
     expiry,
     underlying,
     strike,
-    amount
+    amount,
   })
   .then(() => {
     library.contracts.getPositions()
@@ -647,11 +636,9 @@ Borrow a loan(create a position).
 > Sample Code
 
 ```javascript
-library.contracts
-  .onRepay(positionId, amount)
-  .then(() => {
-    library.contracts.getPositions()
-  })
+library.contracts.onRepay(positionId, amount).then(() => {
+  library.contracts.getPositions()
+})
 ```
 
 <code class="sample">library.contracts.onRepay(positionId, amount)</code>
@@ -663,34 +650,56 @@ Re-pay to loan.
 > Sample Code
 
 ```javascript
-library.contracts
-  .onWithdrawCollateral(positionId)
-  .then(() => {
-    library.contracts.getPositions()
-  })
+library.contracts.onWithdrawCollateral(positionId).then(() => {
+  library.contracts.getPositions()
+})
 ```
 
 <code class="sample">library.contracts.onWithdrawCollateral(positionId)</code>
 
 Withdraw collateral to loan.
 
+## contracts.onTransfer
+
+> Sample Code
+
+```javascript
+const { token, amount, to, id, data } = form
+library.contracts.onTransfer({ token, amount, to, id, data }).then(() => {
+  library.contracts.getBalances()
+})
+```
+
+<code class="sample">library.contracts.onTransfer(form)</code>
+
+Transfer Tokens.
+
+| Key    | Type              | Default | Description             |
+| ------ | ----------------- | ------- | ----------------------- |
+| token  | `string`          | -       | Token name.             |
+| amount | `number`,`string` | -       | Amount to transfer.     |
+| to     | `address`         | -       | Address to transfer.    |
+| id     | `number`,`string` | -       | `id` of token for MFTs. |
+| data   | `string`          | ''      | Data                    |
+
 # Web3Utils Class
 
-It uses origin Web3 [latest](https://web3js.readthedocs.io/en/1.2.4/).
-And you can find its definition on [Lendroid Services](https://github.com/lendroidproject/lendroid-2-js/blob/master/src/services/web3Utils.ts)
+It uses origin Web3 [latest](https://web3js.readthedocs.io/en/1.2.4/). And you can find its definition on
+[Lendroid Services](https://github.com/lendroidproject/lendroid-2-js/blob/master/src/services/web3Utils.ts)
 
 ## toWei
 
 > Sample Code
 
 ```javascript
-library.web3Utils.toWei(1);
+library.web3Utils.toWei(1)
 // return : "1000000000000000000"
 ```
 
 <code class="sample">library.web3Utils.toWei(number)</code>
 
-Converts any `ether value` value into `wei`. It refers [Web3](https://web3js.readthedocs.io/en/v1.2.4/web3-utils.html#towei)
+Converts any `ether value` value into `wei`. It refers
+[Web3](https://web3js.readthedocs.io/en/v1.2.4/web3-utils.html#towei)
 
 ### Parameters
 
@@ -707,13 +716,14 @@ Converts any `ether value` value into `wei`. It refers [Web3](https://web3js.rea
 > Sample Code
 
 ```javascript
-library.web3Utils.fromWei("1000000000000000000");
+library.web3Utils.fromWei('1000000000000000000')
 // return : "1"
 ```
 
 <code class="sample">library.web3Utils.fromWei(number)</code>
 
-Converts any `wei` value into `ether value`. It refers [Web3](https://web3js.readthedocs.io/en/v1.2.4/web3-utils.html#fromwei)
+Converts any `wei` value into `ether value`. It refers
+[Web3](https://web3js.readthedocs.io/en/v1.2.4/web3-utils.html#fromwei)
 
 ### Parameters
 
@@ -726,13 +736,14 @@ Converts any `wei` value into `ether value`. It refers [Web3](https://web3js.rea
 > Sample Code
 
 ```javascript
-library.web3Utils.toBN(1234).toString();
+library.web3Utils.toBN(1234).toString()
 // return : "1234"
 ```
 
 <code class="sample">library.web3Utils.toBN(number)</code>
 
-Convert any given value (including `BigNumber.js` instances) into a `BN.js` instance, for handling big numbers in JavaScript. It refers [Web3](https://web3js.readthedocs.io/en/v1.2.4/web3-utils.html#tobn)
+Convert any given value (including `BigNumber.js` instances) into a `BN.js` instance, for handling big numbers in
+JavaScript. It refers [Web3](https://web3js.readthedocs.io/en/v1.2.4/web3-utils.html#tobn)
 
 ### Parameters
 
@@ -745,13 +756,14 @@ Convert any given value (including `BigNumber.js` instances) into a `BN.js` inst
 > Sample Code
 
 ```javascript
-library.web3Utils.toDecimal(0xea).toString();
+library.web3Utils.toDecimal(0xea).toString()
 // return : 234
 ```
 
 <code class="sample">library.web3Utils.toDecimal(hex)</code>
 
-Number representation of a given HEX value. It refers [Web3](https://web3js.readthedocs.io/en/v1.2.4/web3-utils.html#hextonumber)
+Number representation of a given HEX value. It refers
+[Web3](https://web3js.readthedocs.io/en/v1.2.4/web3-utils.html#hextonumber)
 
 ### Parameters
 
@@ -764,7 +776,7 @@ Number representation of a given HEX value. It refers [Web3](https://web3js.read
 > Sample Code
 
 ```javascript
-library.web3Utils.substract(1, 1);
+library.web3Utils.substract(1, 1)
 // return : 0
 ```
 
@@ -775,7 +787,7 @@ BN Substraction between numbers. [Reference](https://mikemcl.github.io/bignumber
 > Sample Code
 
 ```javascript
-library.web3Utils.substractBN("1000000000000000000", "1000000000000000000");
+library.web3Utils.substractBN('1000000000000000000', '1000000000000000000')
 // return : 0
 ```
 
@@ -786,7 +798,7 @@ Substract between Big-Numbers. [Reference](https://mikemcl.github.io/bignumber.j
 > Sample Code
 
 ```javascript
-library.web3Utils.createContract(contractABI, supportTokens[token][network]);
+library.web3Utils.createContract(contractABI, supportTokens[token][network])
 ```
 
 <code class="sample">createContract(abi, address)</code>
@@ -805,7 +817,7 @@ Returns Web3 contract for ABI and contract address.
 > Sample Code
 
 ```javascript
-library.web3Utils.sendSignedTransaction(approval._signed_transaction);
+library.web3Utils.sendSignedTransaction(approval._signed_transaction)
 ```
 
 <code class="sample">sendSignedTransaction(signedTransactionData)</code>
@@ -823,7 +835,7 @@ Returns Web3 contract for ABI and contract address.
 > Sample Code
 
 ```javascript
-library.web3Utils.getBlockTimeStamp();
+library.web3Utils.getBlockTimeStamp()
 ```
 
 <code class="sample">getBlockTimeStamp()</code>
